@@ -16,3 +16,34 @@ li{
   text-decoration: none;
   list-style-type: none;
 }
+
+.backgroundClearDay{
+  background-image: url("./weahter-background/clear_day.png");
+  background-size: cover;
+  color: white;
+  font-weight: bolder;
+}
+
+.backgroundOvercastDay{
+  background-image: url("./weahter-background/overcast_day.png");
+  background-size: cover;
+  color: white;
+  font-weight: bolder;
+}
+.backgroundRainDay{
+  background-image: url("./weahter-background/rain_day.png");
+  background-size: cover;
+  color: white;
+  font-weight: bolder;
+}
+
+.backgroundThunderStormDay{
+  background-image: url("./weahter-background/thunderstorm_day.png");
+  background-size: cover;
+  color: white;
+  font-weight: bolder;
+}
+
+.card-body{
+  background-color: rgba(0,0,0,0.2);
+}

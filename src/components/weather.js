@@ -9,6 +9,19 @@ class Weather extends Component{
         }
     }
 
+    changeBackground(weather) {
+        switch (weather.toString().toLowerCase()) {
+            case 'clouds':
+                return 'card backgroundOvercastDay';
+            case 'rain' :
+                return 'card backgroundRainDay';
+            case 'clear' :
+                return 'card backgroundClearDay';
+            default :
+                return 'card'
+        }
+    }
+
     componentDidMount() {
 
         fetch('http://api.openweathermap.org/data/2.5/weather?q=' + this.props.cityname + ',fr&units=metric&appid=e7244f113d429bc8a453d641e588f3aa&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
@@ -83,9 +96,9 @@ class Weather extends Component{
         //const windUrl = "https://tile.openweathermap.org/map/wind_new/6/" + this.state.weathers.map(weather => String(weather.coord.lat)) + "/" + this.state.weathers.map(weather => String(weather.coord.lon)) + ".png?appid=e7244f113d429bc8a453d641e588f3aa"
         {console.log(this.state.weathers)}
         return(
-            <div className="card">
-                <h2 className="card-title">{this.state.weathers.map(weather => weather.name)}</h2>
+            <div className={this.changeBackground(this.state.weathers.map(weather => weather.weather[0].main))}>
                 <div className="card-body">
+                    <h2 className="card-title">{this.state.weathers.map(weather => weather.name)}</h2>
                     <div className="row">
                         <div className="col">
                             <div>
