@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
+import ForecastWeather from './forecastWeather'
 
 class Weather extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            weathers:[]
+            weathers:[],
+            lat: '',
+            lon: '',
         }
+        //this.latLonUpdate = this.latLonUpdate.bind(this);
+
     }
 
     changeBackground(weather) {
@@ -27,11 +32,24 @@ class Weather extends Component{
         fetch('http://api.openweathermap.org/data/2.5/weather?q=' + this.props.cityname + ',fr&units=metric&appid=e7244f113d429bc8a453d641e588f3aa&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 this.setState({weathers: [data]})
+                this.setState({lat: this.state.weathers.map(weather => weather.coord.lat).toString()})
+                this.setState({lon: this.state.weathers.map(weather => weather.coord.lon).toString()})
+                //this.latLonUpdate();
             })
             .catch(console.log)
     }
+
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.lat !== this.state.lat){
+            if(prevState.lon !== this.state.lon){
+
+            }
+        }
+    }
+
 
 
     actualWeatherImg(status) {
@@ -86,15 +104,22 @@ class Weather extends Component{
         }
     }
 
-    date(utcTime){
-        console.log(utcTime)
-        const time = new Date(1594871049)
-        console.log(time.toLocaleString());
-    }
-
     render() {
         //const windUrl = "https://tile.openweathermap.org/map/wind_new/6/" + this.state.weathers.map(weather => String(weather.coord.lat)) + "/" + this.state.weathers.map(weather => String(weather.coord.lon)) + ".png?appid=e7244f113d429bc8a453d641e588f3aa"
         {console.log(this.state.weathers)}
+
+        let rain;
+        let forecast
+        if(!(this.state.weathers.map(weather => weather.rain))){
+            rain = <div className="col">
+                <h5>Précipitations</h5>
+                <p>1h : {this.state.weathers.map(weather => weather.rain["1h"])} mm</p>
+                </div>
+        }
+        if(this.state.lat !== '' && this.state.lon !== ''){
+            forecast = <ForecastWeather lat={this.state.lat} lon={this.state.lon}/>
+        }
+
         return(
             <div className={this.changeBackground(this.state.weathers.map(weather => weather.weather[0].main))}>
                 <div className="card-body">
@@ -127,6 +152,7 @@ class Weather extends Component{
                                     <li>Ressentit : {this.state.weathers.map(weather => weather.main.feels_like)} C°</li>
                                     <li>Humidité : {this.state.weathers.map(weather => weather.main.humidity)} %</li>
                                     <li>Pression : {this.state.weathers.map(weather => weather.main.pressure)} hPa</li>
+                                    <li>Visibilité : {this.state.weathers.map(weather => weather.visibility)} m</li>
                                 </ul>
                             </div>
                         </div>
@@ -142,13 +168,11 @@ class Weather extends Component{
                                 <p><i className="fas fa-thermometer-quarter"></i> Min: {this.state.weathers.map(weather => weather.main.temp_min)}°</p>
                             </div>
                         </div>
-                        <div className="col">
-                            <h5>nom à voir</h5>
-                            {this.date(this.state.weathers.map(weather => weather.sys.sunrise))}
-                            <p>{this.state.weathers.map(weather => weather.sys.sunrise)}</p>
-                            <p>{this.state.weathers.map(weather => weather.sys.sunset)}</p>
-                        </div>
+                        {rain}
                     </div>
+                </div>
+                <div className="card-body" id="forecastWeather">
+                    {forecast}
                 </div>
 
             </div>
