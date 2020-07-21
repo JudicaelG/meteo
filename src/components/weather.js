@@ -50,7 +50,39 @@ class Weather extends Component{
         }
     }
 
+    isRain(){
+        if(!(this.state.weathers.map(weather => weather.rain))){
+            return <div className="col">
+                <h5>Précipitations</h5>
+                <p>1h : {this.state.weathers.map(weather => weather.rain["1h"])} mm</p>
+                <p>3h : {this.state.weathers.map(weather => weather.rain["3h"])} mm</p>
+            </div>
+        }
+        else{
+            return <div className="col">
+                <h5>Précipitations</h5>
+                <p>1h : 0 mm</p>
+                <p>3h : 0 mm</p>
+            </div>
+        }
+    }
 
+    isSnow(){
+        if(!(this.state.weathers.map(weather => weather.snow))){
+            return <div className="col">
+                <h5>Neiges</h5>
+                <p>1h : {this.state.weathers.map(weather => weather.snow["1h"])} mm</p>
+                <p>3h : {this.state.weathers.map(weather => weather.snow["3h"])} mm</p>
+            </div>
+        }
+        else{
+            return <div className="col">
+                <h5>Neiges</h5>
+                <p>1h : 0 mm</p>
+                <p>3h : 0 mm</p>
+            </div>
+        }
+    }
 
     actualWeatherImg(status) {
         switch (status.toString()) {
@@ -75,6 +107,12 @@ class Weather extends Component{
             default:
                 return <img className="float-left" src="http://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
         }
+    }
+
+    getTime(datetime){
+        let date = new Date(datetime * 1000);
+        let time = date.getHours() + ':' + date.getMinutes()
+        return time
     }
 
     windDirection(direction){
@@ -110,12 +148,7 @@ class Weather extends Component{
 
         let rain;
         let forecast
-        if(!(this.state.weathers.map(weather => weather.rain))){
-            rain = <div className="col">
-                <h5>Précipitations</h5>
-                <p>1h : {this.state.weathers.map(weather => weather.rain["1h"])} mm</p>
-                </div>
-        }
+
         if(this.state.lat !== '' && this.state.lon !== ''){
             forecast = <ForecastWeather lat={this.state.lat} lon={this.state.lon}/>
         }
@@ -125,28 +158,22 @@ class Weather extends Component{
                 <div className="card-body">
                     <h2 className="card-title">{this.state.weathers.map(weather => weather.name)}</h2>
                     <div className="row">
-                        <div className="col">
-                            <div>
+                        <div className="col d-flex align-items-center">
                                 {this.actualWeatherImg(this.state.weathers.map(weather => weather.weather[0].icon))}
                                 <ul>
                                     <li>{this.state.weathers.map(weather => weather.weather[0].description)}</li>
                                     <li>Nébulosité : {this.state.weathers.map(weather => weather.clouds.all)} %</li>
                                     <li>Température : {this.state.weathers.map(weather => weather.main.temp)} C°</li>
                                 </ul>
-
-
-                            </div>
                         </div>
-                        <div className="col">
-                            <div>
-                                <p className="float-left mr-2 mb-0" ><i className="fas fa-wind fa-5x"></i></p>
-                                <ul>
-                                    {this.windDirection(this.state.weathers.map(weather => weather.wind.deg))}
-                                    <li> {this.state.weathers.map(weather => weather.wind.speed)} km/h</li>
-                                </ul>
-                            </div>
+                        <div className="col d-flex align-items-center">
+                            <p className="float-left mr-2 mb-0" ><i className="fas fa-wind fa-5x"></i></p>
+                            <ul>
+                                {this.windDirection(this.state.weathers.map(weather => weather.wind.deg))}
+                                <li> {this.state.weathers.map(weather => weather.wind.speed)} km/h</li>
+                            </ul>
                         </div>
-                        <div className="col">
+                        <div className="col d-flex align-items-center">
                             <div>
                                 <ul>
                                     <li>Ressentit : {this.state.weathers.map(weather => weather.main.feels_like)} C°</li>
@@ -163,16 +190,25 @@ class Weather extends Component{
                     <div className="row">
                         <div className="col">
                             <div>
-                                <h5>Températures</h5>
+                                <h5 >Températures</h5>
                                 <p><i className="fas fa-thermometer-full"></i> Max: {this.state.weathers.map(weather => weather.main.temp_max)}°</p>
                                 <p><i className="fas fa-thermometer-quarter"></i> Min: {this.state.weathers.map(weather => weather.main.temp_min)}°</p>
                             </div>
                         </div>
-                        {rain}
+                        <div className="col">
+                            <div>
+                                <h5>Lever et coucher de soleil</h5>
+                                <p>{this.getTime(this.state.weathers.map(weather => weather.sys.sunrise))}</p>
+                                <p>{this.getTime(this.state.weathers.map(weather => weather.sys.sunset))}</p>
+                            </div>
+                        </div>
+                        {this.isRain()}
+                        {this.isSnow()}
                     </div>
                 </div>
                 <div className="card-body" id="forecastWeather">
-                    {forecast}
+                    <h2 className="card-title">Prévisions</h2>
+                        {forecast}
                 </div>
 
             </div>
