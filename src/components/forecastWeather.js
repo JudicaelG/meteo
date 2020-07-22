@@ -11,7 +11,7 @@ class forecastWeather extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=e7244f113d429bc8a453d641e588f3aa')//https://api.openweathermap.org/data/2.5/onecall?lat=48.76&lon=7.52&%20exclude=current,minutely,hourly&appid=e7244f113d429bc8a453d641e588f3aa
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '')//https://api.openweathermap.org/data/2.5/onecall?lat=48.76&lon=7.52&%20exclude=current,minutely,hourly&appid=e7244f113d429bc8a453d641e588f3aa
             .then(res => res.json())
             .then((data) => {
                 this.setState({weathers: [data]})

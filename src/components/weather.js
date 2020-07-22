@@ -29,7 +29,7 @@ class Weather extends Component{
 
     componentDidMount() {
         if(this.props.cityname !== ''){
-            fetch('http://api.openweathermap.org/data/2.5/weather?q=' + this.props.cityname + ',fr&units=metric&appid=e7244f113d429bc8a453d641e588f3aa&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
+            fetch('http://api.openweathermap.org/data/2.5/weather?q=' + this.props.cityname + ',fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({weathers: [data]})
@@ -39,7 +39,7 @@ class Weather extends Component{
                 })
                 .catch(console.log)
         }else{
-            fetch('http://api.openweathermap.org/data/2.5/weather?lat=' + this.props.lat + '&lon=' + this.props.lon + '&units=metric&appid=e7244f113d429bc8a453d641e588f3aa&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
+            fetch('http://api.openweathermap.org/data/2.5/weather?lat=' + this.props.lat + '&lon=' + this.props.lon + '&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({weathers: [data]})
