@@ -29,17 +29,22 @@ class Weather extends Component{
 
     componentDidMount() {
         if(this.props.cityname !== ''){
-            fetch('http://api.openweathermap.org/data/2.5/weather?q=' + this.props.cityname + ',fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=' + this.props.cityname + '&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({weathers: [data]})
-                    this.setState({lat: this.state.weathers.map(weather => weather.coord.lat).toString()})
-                    this.setState({lon: this.state.weathers.map(weather => weather.coord.lon).toString()})
-                    //this.latLonUpdate();
+                    if(this.state.weathers.map(weather => weather.cod) == '200'){
+                        this.setState({lat: this.state.weathers.map(weather => weather.coord.lat).toString()})
+                        this.setState({lon: this.state.weathers.map(weather => weather.coord.lon).toString()})
+                    }
+
                 })
-                .catch(console.log)
+                .catch()
+
+
+
         }else{
-            fetch('http://api.openweathermap.org/data/2.5/weather?lat=' + this.props.lat + '&lon=' + this.props.lon + '&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')//http://api.openweathermap.org/data/2.5/weather?q=melsheim,fr&appid=e7244f113d429bc8a453d641e588f3aa
+            fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + this.props.lat + '&lon=' + this.props.lon + '&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')
                 .then(res => res.json())
                 .then((data) => {
                     this.setState({weathers: [data]})
@@ -47,7 +52,7 @@ class Weather extends Component{
                     this.setState({lon: this.state.weathers.map(weather => weather.coord.lon).toString()})
                     //this.latLonUpdate();
                 })
-                .catch(console.log)
+                .catch()
         }
 
     }
@@ -89,25 +94,25 @@ class Weather extends Component{
     actualWeatherImg(status) {
         switch (status.toString()) {
             case '01d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
             case '02d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/02d@2x.png" alt="few clouds"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/02d@2x.png" alt="few clouds"/>;
             case '03d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/03d@2x.png" alt="scattered clouds"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/03d@2x.png" alt="scattered clouds"/>;
             case '04d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/04d@2x.png" alt="broken clouds"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/04d@2x.png" alt="broken clouds"/>;
             case '09d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/09d@2x.png" alt="shower rain"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/09d@2x.png" alt="shower rain"/>;
             case '10d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/10d@2x.png" alt="rain"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/10d@2x.png" alt="rain"/>;
             case '11d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/11d@2x.png" alt="thunderstorm"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/11d@2x.png" alt="thunderstorm"/>;
             case '13d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/13d@2x.png" alt="snow"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/13d@2x.png" alt="snow"/>;
             case '50d':
-                return <img className="float-left" src="http://openweathermap.org/img/wn/50d@2x.png" alt="mist"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/50d@2x.png" alt="mist"/>;
             default:
-                return <img className="float-left" src="http://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
+                return <img className="float-left" src="https://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
         }
     }
 

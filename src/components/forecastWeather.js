@@ -11,12 +11,12 @@ class forecastWeather extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '')//https://api.openweathermap.org/data/2.5/onecall?lat=48.76&lon=7.52&%20exclude=current,minutely,hourly&appid=e7244f113d429bc8a453d641e588f3aa
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '')
             .then(res => res.json())
             .then((data) => {
                 this.setState({weathers: [data]})
             })
-            .catch(console.log)
+            .catch()
     }
 
     generatePrevision(){
@@ -51,25 +51,25 @@ class forecastWeather extends Component {
     weatherImg(status) {
         switch (status.toString()) {
             case '01d':
-                return <img className="" src="http://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
             case '02d':
-                return <img className="" src="http://openweathermap.org/img/wn/02d@2x.png" alt="few clouds"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/02d@2x.png" alt="few clouds"/>;
             case '03d':
-                return <img className="" src="http://openweathermap.org/img/wn/03d@2x.png" alt="scattered clouds"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/03d@2x.png" alt="scattered clouds"/>;
             case '04d':
-                return <img className="" src="http://openweathermap.org/img/wn/04d@2x.png" alt="broken clouds"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/04d@2x.png" alt="broken clouds"/>;
             case '09d':
-                return <img className="" src="http://openweathermap.org/img/wn/09d@2x.png" alt="shower rain"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/09d@2x.png" alt="shower rain"/>;
             case '10d':
-                return <img className="" src="http://openweathermap.org/img/wn/10d@2x.png" alt="rain"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/10d@2x.png" alt="rain"/>;
             case '11d':
-                return <img className="" src="http://openweathermap.org/img/wn/11d@2x.png" alt="thunderstorm"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/11d@2x.png" alt="thunderstorm"/>;
             case '13d':
-                return <img className="" src="http://openweathermap.org/img/wn/13d@2x.png" alt="snow"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/13d@2x.png" alt="snow"/>;
             case '50d':
-                return <img className="" src="http://openweathermap.org/img/wn/50d@2x.png" alt="mist"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/50d@2x.png" alt="mist"/>;
             default:
-                return <img className="" src="http://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
+                return <img className="" src="https://openweathermap.org/img/wn/01d@2x.png" alt="clear sky"/>;
         }
     }
     render(){

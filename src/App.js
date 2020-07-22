@@ -29,7 +29,7 @@ class App extends Component {
     render() {
 
         let weather = null;
-        if(this.state.lat !== '' && this.state.lon !== '' && this.state.cityname == '')
+        if(this.state.lat !== '' && this.state.lon !== '' && this.state.cityname === '')
         {
             weather = <Weather lat={this.state.lat} lon={this.state.lon} cityname={this.state.cityname} />
         }
