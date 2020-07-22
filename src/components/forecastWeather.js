@@ -14,7 +14,6 @@ class forecastWeather extends Component {
         fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=e7244f113d429bc8a453d641e588f3aa')//https://api.openweathermap.org/data/2.5/onecall?lat=48.76&lon=7.52&%20exclude=current,minutely,hourly&appid=e7244f113d429bc8a453d641e588f3aa
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 this.setState({weathers: [data]})
             })
             .catch(console.log)
@@ -27,8 +26,8 @@ class forecastWeather extends Component {
                     <div className="col text-center" key={i}>
                         <h5>{this.getDate(day.dt)}</h5>
                         <p>{this.weatherImg(day.weather[0].icon)}</p>
-                        <p><i className="fas fa-thermometer-quarter"></i> {day.temp.min}°</p>
-                        <p><i className="fas fa-thermometer-full"></i> {day.temp.max}°</p>
+                        <p><i className="fas fa-thermometer-quarter"></i> {day.temp.min} C°</p>
+                        <p><i className="fas fa-thermometer-full"></i> {day.temp.max} C°</p>
                         <p>{this.getTime(day.sunrise)}</p>
                         <p>{this.getTime(day.sunset)}</p>
                     </div>
@@ -74,9 +73,7 @@ class forecastWeather extends Component {
         }
     }
     render(){
-        {console.log(this.state.weathers)}
         const daily = this.generatePrevision()
-        console.log(daily)
         return (
             <div className="row">
                 {daily}
