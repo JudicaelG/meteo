@@ -14,6 +14,7 @@ class forecastWeather extends Component {
         fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '')
             .then(res => res.json())
             .then((data) => {
+                console.log(data)
                 this.setState({weathers: [data]})
             })
             .catch()
@@ -24,7 +25,7 @@ class forecastWeather extends Component {
            return weather.daily.map((day, i) =>{
                if(i > 0){
                    return(
-                       <div className="col text-center" key={i}>
+                       <div className="col-sm text-center" key={i}>
                            <h5>{this.getDate(day.dt)}</h5>
                            <p>{this.weatherImg(day.weather[0].icon)}</p>
                            <p><i className="fas fa-thermometer-quarter"></i> {day.temp.min} C°</p>
@@ -98,6 +99,68 @@ class forecastWeather extends Component {
         })
     }
 
+    getDayTemp(){
+        return this.state.weathers.map((weather, i) =>{
+            return(
+                <div className="col-sm" key={i}>
+                    <h5 >Températures</h5>
+                    <ul className="pl-0">
+                        <li><i className="fas fa-thermometer-full"></i> Max: {weather.daily[0].temp.max} C°</li>
+                        <li><i className="fas fa-thermometer-quarter"></i> Min: {weather.daily[0].temp.min} C°</li>
+                    </ul>
+                </div>
+            )
+        })
+    }
+
+    isRain(){
+        if(!(this.state.weathers.map(weather => weather.current.rain))){
+            return <div className="col-sm">
+                <h5 className="pl-0">Précipitations</h5>
+                <ul>
+                    <li>prob : {this.state.weathers.map(weather => weather.daily[0].pop)}%</li>
+                    <li>1h : {this.state.weathers.map(weather => weather.current.rain["1h"])} mm</li>
+                    <li>3h : {this.state.weathers.map(weather => weather.current.rain["3h"])} mm</li>
+                </ul>
+            </div>
+        }
+        else{
+            return <div className="col-sm">
+                <h5>Précipitations</h5>
+                <ul className="pl-0">
+                    <li>prob : {this.state.weathers.map(weather => weather.daily[0].pop)}%</li>
+                    <li>1h : 0 mm</li>
+                    <li>3h : 0 mm</li>
+                </ul>
+            </div>
+        }
+    }
+
+    isSnow(){
+        if(!(this.state.weathers.map(weather => weather.current.snow))){
+            return <div className="col-sm">
+                <h5>Neiges</h5>
+                <ul className="pl-0">
+                    <li>1h : {this.state.weathers.map(weather => weather.current.snow["1h"])} mm</li>
+                    <li>3h : {this.state.weathers.map(weather => weather.current.snow["3h"])} mm</li>
+                </ul>
+            </div>
+        }
+        else{
+            return <div className="col-sm">
+                <h5>Neiges</h5>
+                <ul className="pl-0">
+                    <li>1h : 0 mm</li>
+                    <li>3h : 0 mm</li>
+                </ul>
+            </div>
+        }
+    }
+
+
+
+
+
     getDate(datetime){
         let date = new Date(datetime * 1000);
         const day = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
@@ -153,6 +216,13 @@ class forecastWeather extends Component {
         const hourly = this.generateHourPerHour()
         return (
             <div>
+                <h2 className="card-title font-weight-bold">Détails</h2>
+                <div className="row">
+                    {this.getDayTemp()}
+                    {this.isRain()}
+                    {this.isSnow()}
+                </div>
+                <hr className="border-top border-white"></hr>
                 <h2 className="card-title font-weight-bold">Prévisions</h2>
                 <h3 className="card-title">Heures</h3>
                 <div className="row">

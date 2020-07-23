@@ -48,6 +48,7 @@ class Weather extends Component{
             fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + this.props.lat + '&lon=' + this.props.lon + '&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '&lang=fr')
                 .then(res => res.json())
                 .then((data) => {
+                    console.log(data)
                     this.setState({weathers: [data]})
                     this.setState({lat: this.state.weathers.map(weather => weather.coord.lat).toString()})
                     this.setState({lon: this.state.weathers.map(weather => weather.coord.lon).toString()})
@@ -57,39 +58,7 @@ class Weather extends Component{
 
     }
 
-    isRain(){
-        if(!(this.state.weathers.map(weather => weather.rain))){
-            return <div className="col">
-                <h5>Précipitations</h5>
-                <p>1h : {this.state.weathers.map(weather => weather.rain["1h"])} mm</p>
-                <p>3h : {this.state.weathers.map(weather => weather.rain["3h"])} mm</p>
-            </div>
-        }
-        else{
-            return <div className="col">
-                <h5>Précipitations</h5>
-                <p>1h : 0 mm</p>
-                <p>3h : 0 mm</p>
-            </div>
-        }
-    }
 
-    isSnow(){
-        if(!(this.state.weathers.map(weather => weather.snow))){
-            return <div className="col">
-                <h5>Neiges</h5>
-                <p>1h : {this.state.weathers.map(weather => weather.snow["1h"])} mm</p>
-                <p>3h : {this.state.weathers.map(weather => weather.snow["3h"])} mm</p>
-            </div>
-        }
-        else{
-            return <div className="col">
-                <h5>Neiges</h5>
-                <p>1h : 0 mm</p>
-                <p>3h : 0 mm</p>
-            </div>
-        }
-    }
 
     actualWeatherImg(status) {
         switch (status.toString()) {
@@ -259,20 +228,6 @@ class Weather extends Component{
                             </div>
                         </div>
                         <hr className="border-top border-white"></hr>
-                        <h2 className="card-title font-weight-bold">Détails</h2>
-                        <div className="row">
-                            <div className="col">
-                                <div>
-                                    <h5 >Températures</h5>
-                                    <p><i className="fas fa-thermometer-full"></i> Max: {this.state.weathers.map(weather => weather.main.temp_max)} C°</p>
-                                    <p><i className="fas fa-thermometer-quarter"></i> Min: {this.state.weathers.map(weather => weather.main.temp_min)} C°</p>
-                                </div>
-                            </div>
-                            {this.isRain()}
-                            {this.isSnow()}
-                        </div>
-                        <hr className="border-top border-white"></hr>
-
                         {forecast}
                     </div>
 
