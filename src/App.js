@@ -19,17 +19,20 @@ class App extends Component {
     }
 
   componentDidMount() {
-        if(navigator.geolocation)
-        navigator.geolocation.watchPosition((position) =>{
-            this.setState({lat: position.coords.latitude})
-            this.setState({lon: position.coords.longitude})
-      })
+        if(navigator.geolocation){
+            navigator.geolocation.watchPosition((position) =>{
+                this.setState({lat: position.coords.latitude})
+                this.setState({lon: position.coords.longitude})
+            })
+        }
+
   }
+
 
     render() {
 
         let weather = null;
-        if(this.state.lat !== '' && this.state.lon !== '' && this.state.cityname === '')
+        if(this.state.lat !== '' && this.state.lon !== '' && this.state.cityname == '')
         {
             weather = <Weather lat={this.state.lat} lon={this.state.lon} cityname={this.state.cityname} />
         }
