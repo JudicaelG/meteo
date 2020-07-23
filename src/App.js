@@ -40,7 +40,7 @@ class App extends Component {
     return (
         <div>
             <div>
-                <input type="text"  value={this.state.cityname} onChange={this.handleChange}/>
+                <input className="form-control mb-2 mt-2"  placeholder="Paris" type="text"  value={this.state.cityname} onChange={this.handleChange}/>
             </div>
             <div key={this.state.cityname}>
                 {weather}

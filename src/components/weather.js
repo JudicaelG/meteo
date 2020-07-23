@@ -117,8 +117,15 @@ class Weather extends Component{
     }
 
     getTime(datetime){
+
         let date = new Date(datetime * 1000);
-        let time = date.getHours() + ':' + date.getMinutes()
+        let min = date.getMinutes()
+        if(min < 10){
+            min = '0' + min
+        }else{
+            min = min + ''
+        }
+        let time = date.getHours() + ':' + min
         return time
     }
 
@@ -198,9 +205,8 @@ class Weather extends Component{
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="card-body">
-                        <h2 className="card-title">Détails</h2>
+                        <hr className="border-top border-white"></hr>
+                        <h2 className="card-title font-weight-bold">Détails</h2>
                         <div className="row">
                             <div className="col">
                                 <div>
@@ -219,9 +225,7 @@ class Weather extends Component{
                             {this.isRain()}
                             {this.isSnow()}
                         </div>
-                    </div>
-                    <div className="card-body" id="forecastWeather">
-                        <h2 className="card-title">Prévisions</h2>
+                        <hr className="border-top border-white"></hr>
                         {forecast}
                     </div>
 
