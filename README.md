@@ -2,8 +2,6 @@
 
 Projet d'app météo pour découvrir ReactJS. Utilisation de l'API openweathermap pour récupérer les données météorologiques.
 
-<hr></hr>
-
 ## To-Do list
 
 <ol>
