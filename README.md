@@ -7,4 +7,5 @@ Projet d'app météo pour découvrir ReactJS. Utilisation de l'API openweatherma
 <ol>
   <li>Ajouter des tests</li>
   <li>Ajouter la possibilité de voir différentes cartes avec le vent, la température, la pluie, les nuages.</li>
+  <li>Ajouter des graphiques de température/vent/pluie</li>
 </ol>
