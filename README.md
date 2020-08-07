@@ -1,8 +1,15 @@
 # App météo
 
-Projet d'app météo pour découvrir ReactJS. Utilisation de l'API openweathermap pour récupérer les données météorologiques.
+Projet d'app météo pour découvrir ReactJS.
 
-## To-Do list
+# Les outils utilisés
+<ol>
+  <li>Openweathermap : API pour récupérer les données météorologique, les icones de météo et les cartes</li>
+  <li>React chart js : librairie pour faire les différents graphiques.</li>
+  <li>Jest pour les tests</li>
+</ol>
+
+# To-Do list
 
 <ol>
   <li>Ajouter des tests</li>
