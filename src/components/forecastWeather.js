@@ -14,20 +14,20 @@ class forecastWeather extends Component {
         fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '')
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 this.setState({weathers: [data]})
             })
             .catch()
     }
 
-    generatePrevision(){
+     // function to generate daily forecast 7 days
+    generateDailyForecast(){
        return this.state.weathers.map(weather => {
            return weather.daily.map((day, i) =>{
                if(i > 0){
                    return(
                        <div className="col-sm text-center" key={i}>
-                           <h5>{this.getDate(day.dt)}</h5>
-                           <p>{this.weatherImg(day.weather[0].icon)}</p>
+                           <h5>{this.getDay(day.dt)}</h5>
+                           <p>{this.weatherImage(day.weather[0].icon)}</p>
                            <p><i className="fas fa-thermometer-quarter"></i> {day.temp.min} C°</p>
                            <p><i className="fas fa-thermometer-full"></i> {day.temp.max} C°</p>
                            <p><svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 30 30" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg">
@@ -82,14 +82,15 @@ class forecastWeather extends Component {
        })
     }
 
-    generateHourPerHour(){
+    //generate hourly forecast +10 hour
+    generateHourlyForecast(){
         return this.state.weathers.map(weather =>{
             return weather.hourly.map((hour, i) =>{
                 if(i < 10){
                     return(
                         <div className="col-sm text-center" key={i}>
-                            <h5 className="">{this.getTime(hour.dt)}</h5>
-                            {this.weatherImg(hour.weather[0].icon)}
+                            <h5>{this.getTime(hour.dt)}</h5>
+                            {this.weatherImage(hour.weather[0].icon)}
                             <p>{hour.temp} C°</p>
                         </div>
                     )
@@ -99,7 +100,8 @@ class forecastWeather extends Component {
         })
     }
 
-    getDayTemp(){
+    //get min and max temperature
+    getDayTemperature(){
         return this.state.weathers.map((weather, i) =>{
             return(
                 <div className="col-sm" key={i}>
@@ -112,6 +114,7 @@ class forecastWeather extends Component {
             )
         })
     }
+
 
     isRain(){
         if(!(this.state.weathers.map(weather => weather.current.rain))){
@@ -161,7 +164,7 @@ class forecastWeather extends Component {
 
 
 
-    getDate(datetime){
+    getDay(datetime){
         let date = new Date(datetime * 1000);
         const day = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
         return day[date.getUTCDay()];
@@ -187,7 +190,7 @@ class forecastWeather extends Component {
         return time
     }
 
-    weatherImg(status) {
+    weatherImage(status) {
         switch (status.toString()) {
             case '01d':
                 return <img className="" src="https://openweathermap.org/img/wn/01d@2x.png" alt="clear sky" width="80"/>;
@@ -211,14 +214,15 @@ class forecastWeather extends Component {
                 return <img className="" src="https://openweathermap.org/img/wn/01d@2x.png" alt="clear sky" width="80"/>;
         }
     }
+
     render(){
-        const daily = this.generatePrevision()
-        const hourly = this.generateHourPerHour()
+        const daily = this.generateDailyForecast()
+        const hourly = this.generateHourlyForecast()
         return (
             <div>
                 <h2 className="card-title font-weight-bold">Détails</h2>
                 <div className="row">
-                    {this.getDayTemp()}
+                    {this.getDayTemperature()}
                     {this.isRain()}
                     {this.isSnow()}
                 </div>
