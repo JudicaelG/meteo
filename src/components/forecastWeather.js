@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Line, Bar}  from 'react-chartjs-2';
 
 class forecastWeather extends Component {
 
@@ -14,6 +15,7 @@ class forecastWeather extends Component {
         fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + this.props.lat + '&lon=' + this.props.lon + '&%20exclude=current,minutely,hourly&lang=fr-fr&units=metric&appid=' + process.env.REACT_APP_WEATHER_API + '')
             .then(res => res.json())
             .then((data) => {
+                console.log(data)
                 this.setState({weathers: [data]})
             })
             .catch()
@@ -115,6 +117,203 @@ class forecastWeather extends Component {
         })
     }
 
+    setLabels(){
+        const dayLabels = [];
+        this.state.weathers.map(weather => {
+            weather.daily.map((day, i) =>{
+                console.log(i)
+                dayLabels.push(this.getDay(day.dt))
+                console.log(dayLabels[i])
+            })
+        })
+        console.log(dayLabels)
+        return dayLabels
+
+    }
+
+    setData(value){
+        const temperature = [];
+        this.state.weathers.map(weather => {
+            weather.daily.map((day, i) =>{
+                if(value === 'max'){
+                    temperature.push(day.temp.max)
+                }else{
+                    temperature.push(day.temp.min)
+                }
+            })
+        })
+        console.log(temperature)
+        return temperature
+    }
+
+    setSnowOrRain(value){
+        const precipitation = [];
+        this.state.weathers.map(weather => {
+            weather.daily.map((day, i) =>{
+                if(value === 'rain'){
+                    if(!(day.rain)) {
+                        precipitation.push(day.rain)
+                    }
+                }else{
+                    if(!(day.snow)) {
+                        precipitation.push(day.snow)
+                    }
+                }
+            })
+        })
+    }
+
+    generateLineTempChart(){
+        const LineTemperature = {
+            labels: this.setLabels(),
+            datasets: [
+                {
+                    label: 'température max',
+                    fill: false,
+                    lineTension: 0.5,
+                    backgroundColor: 'rgba(255,20,20,1)',
+                    borderColor: 'rgba(255,20,20,1)',
+                    borderWidth: 2,
+                    data: this.setData('max')
+                },
+                {
+                    label: 'température min',
+                    fill: false,
+                    lineTension: 0.5,
+                    backgroundColor: 'rgba(28,20,255,1)',
+                    borderColor: 'rgba(28,20,255,1)',
+                    borderWidth: 2,
+                    data: this.setData('min')
+                }
+            ]
+        }
+
+        const barRain = {
+            labels: this.setLabels(),
+            datasets: [{
+                label: 'Pluie',
+                fill: false,
+                lineTension:0.5,
+                backgroundColor: 'rgba(28,20,255,1)',
+                borderColor: 'rgba(28,20,255,1)',
+                borderWidth: 2,
+                data: this.setSnowOrRain('rain')
+            }]
+        }
+
+        const barSnow = {
+            labels: this.setLabels(),
+            datasets: [{
+                label: 'Neige',
+                fill: false,
+                lineTension:0.5,
+                backgroundColor: 'rgb(201,201,201)',
+                borderColor: 'rgb(201,201,201)',
+                borderWidth: 2,
+                data: this.setSnowOrRain('rain')
+            }]
+        }
+
+        return(
+            <div className="row">
+                <div className="col-sm">
+                <Line data={LineTemperature}
+                  options={{
+                    title:{
+                        display:true,
+                        text:'Températures de la semaine',
+                        fontSize:20,
+                        fontColor: 'rgb(255,255,255)'
+                    },
+                    legend:{
+                        display:true,
+                        position:'right',
+                        labels:{
+                            fontColor: 'rgb(255,255,255)'
+                        }
+                    },
+                    scales:{
+                        yAxes:[{
+                            ticks:{
+                                fontColor: 'rgb(255,255,255)',
+                            }
+                        }],
+                        xAxes:[{
+                            ticks:{
+                                fontColor: 'rgb(255,255,255)',
+                            }
+                        }]
+                      }
+                }}>
+                </Line>
+                </div>
+                <div className="col-sm">
+                <Bar data={barRain}
+                 options={{
+                     title:{
+                         display:true,
+                         text:'Pluie de la semaine',
+                         fontSize:20,
+                         fontColor: 'rgb(255,255,255)'
+                     },
+                     legend:{
+                         display:true,
+                         position:'right',
+                         labels:{
+                             fontColor: 'rgb(255,255,255)'
+                         }
+                     },
+                     scales:{
+                         yAxes:[{
+                             ticks:{
+                                 fontColor: 'rgb(255,255,255)',
+                             }
+                         }],
+                         xAxes:[{
+                             ticks:{
+                                 fontColor: 'rgb(255,255,255)',
+                             }
+                         }]
+                     }
+                 }}
+                >
+                </Bar>
+                </div>
+                <div className="col-sm">
+                <Bar data={barSnow}
+                     options={{
+                         title:{
+                             display:true,
+                             text:'Neige de la semaine',
+                             fontSize:20,
+                             fontColor: 'rgb(255,255,255)'
+                         },
+                         legend:{
+                             display:true,
+                             position:'right',
+                             labels:{
+                                 fontColor: 'rgb(255,255,255)'
+                             }
+                         },
+                         scales:{
+                             yAxes:[{
+                                 ticks:{
+                                     fontColor: 'rgb(255,255,255)',
+                                 }
+                             }],
+                             xAxes:[{
+                                 ticks:{
+                                     fontColor: 'rgb(255,255,255)',
+                                 }
+                             }]
+                         }
+                     }}>
+
+                </Bar>
+                </div>
+            </div>
+        )
+    }
 
     isRain(){
         if(!(this.state.weathers.map(weather => weather.current.rain))){
@@ -236,6 +435,10 @@ class forecastWeather extends Component {
                 <div className="row">
                     {daily}
                 </div>
+                <hr className="border-top border-white"></hr>
+                <h2>Données en graphiques</h2>
+                {this.generateLineTempChart()}
+
             </div>
 
 

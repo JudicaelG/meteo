@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4bcd45c2-66d1-49bd-8263-1a450ae3e3a1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forecastWeather.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forecastWeather.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/weather.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/weather.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/weather.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2373">
-              <caret line="60" column="11" lean-forward="true" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
+            <state relative-caret-position="1003">
+              <caret line="60" column="11" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -45,11 +41,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/forecastWeather.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2934">
-              <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+            <state relative-caret-position="-391">
+              <caret line="281" column="38" selection-start-line="281" selection-start-column="38" selection-end-line="281" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,8 +111,8 @@
         <option value="$PROJECT_DIR$/package-lock.json" />
         <option value="$PROJECT_DIR$/src/components/charts.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/components/forecastWeather.js" />
         <option value="$PROJECT_DIR$/src/components/weather.js" />
+        <option value="$PROJECT_DIR$/src/components/forecastWeather.js" />
       </list>
     </option>
   </component>
@@ -135,6 +134,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -156,19 +156,12 @@
               <item name="meteo" type="b2602c69:ProjectViewProjectNode" />
               <item name="meteo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="meteo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="meteo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="weahter-background" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -249,7 +242,9 @@
       <workItem from="1596469834945" duration="54000" />
       <workItem from="1596726537337" duration="1438000" />
       <workItem from="1596791518408" duration="3134000" />
-      <workItem from="1596799158962" duration="481000" />
+      <workItem from="1596799158962" duration="4618000" />
+      <workItem from="1596809385947" duration="4763000" />
+      <workItem from="1596875554529" duration="315000" />
     </task>
     <task id="LOCAL-00001" summary="connection a l'api,&#10;mise en place de certains element">
       <created>1595230814984</created>
@@ -328,17 +323,24 @@
       <option name="project" value="LOCAL" />
       <updated>1595522766735</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactor">
+      <created>1596799700360</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1596799700360</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102281000" />
+    <option name="totallyTimeSpent" value="111496000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17270789" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17590618" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -421,7 +423,8 @@
     <MESSAGE value="modification favicon" />
     <MESSAGE value="prevision des jours suivant, jour même enlevé lever et coucher de soleil passé au dessus. ajout de l'icone pour lever et coucher de soleil" />
     <MESSAGE value="Details proviennent de l'appel onecall, min temp juste et max temp juste, ajout de la prob de pluie.&#10;card sur tout l'ècran" />
-    <option name="LAST_COMMIT_MESSAGE" value="Details proviennent de l'appel onecall, min temp juste et max temp juste, ajout de la prob de pluie.&#10;card sur tout l'ècran" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -524,22 +527,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/charts.js" />
+    <entry file="file://$PROJECT_DIR$/src/components/weather.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="60" column="11" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
           <caret line="45" column="77" selection-start-line="45" selection-start-column="72" selection-end-line="45" selection-end-column="77" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/charts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="36" column="18" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -567,15 +571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/forecastWeather.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2934">
-          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/weather.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2373">
-          <caret line="60" column="11" lean-forward="true" selection-start-line="60" selection-start-column="11" selection-end-line="60" selection-end-column="11" />
+        <state relative-caret-position="-391">
+          <caret line="281" column="38" selection-start-line="281" selection-start-column="38" selection-end-line="281" selection-end-column="38" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
