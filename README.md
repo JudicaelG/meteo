@@ -14,5 +14,5 @@ Projet d'app météo pour découvrir ReactJS.
 <ol>
   <li>Ajouter des tests</li>
   <li>Ajouter la possibilité de voir différentes cartes avec le vent, la température, la pluie, les nuages.</li>
-  <li>Ajouter des graphiques de ~~température~~/vent/~~pluie~~</li>
+  <li>Ajouter des graphiques de vent</li>
 </ol>
