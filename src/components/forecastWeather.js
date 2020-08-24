@@ -30,8 +30,8 @@ class forecastWeather extends Component {
                        <div className="col-sm text-center" key={i}>
                            <h5>{this.getDay(day.dt)}</h5>
                            <p>{this.weatherImage(day.weather[0].icon)}</p>
-                           <p><i className="fas fa-thermometer-quarter"></i> {day.temp.min} C°</p>
-                           <p><i className="fas fa-thermometer-full"></i> {day.temp.max} C°</p>
+                           <p><i className="fas fa-thermometer-quarter"></i> {day.temp.min} °C</p>
+                           <p><i className="fas fa-thermometer-full"></i> {day.temp.max} °C</p>
                            <p><svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 30 30" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg">
                                <path d="M2.75,15.36c0-0.25,0.1-0.48,0.3-0.69c0.22-0.19,0.46-0.29,0.7-0.29h2.33c0.27,0,0.49,0.1,0.67,0.29
 	c0.18,0.19,0.27,0.43,0.27,0.69c0,0.29-0.09,0.53-0.27,0.72c-0.18,0.19-0.41,0.29-0.67,0.29H3.75c-0.27,0-0.5-0.1-0.7-0.3
@@ -93,7 +93,7 @@ class forecastWeather extends Component {
                         <div className="col-sm text-center" key={i}>
                             <h5>{this.getTime(hour.dt)}</h5>
                             {this.weatherImage(hour.weather[0].icon)}
-                            <p>{hour.temp} C°</p>
+                            <p>{hour.temp} °C</p>
                         </div>
                     )
                 }
@@ -109,8 +109,8 @@ class forecastWeather extends Component {
                 <div className="col-sm" key={i}>
                     <h5 >Températures</h5>
                     <ul className="pl-0">
-                        <li><i className="fas fa-thermometer-full"></i> Max: {weather.daily[0].temp.max} C°</li>
-                        <li><i className="fas fa-thermometer-quarter"></i> Min: {weather.daily[0].temp.min} C°</li>
+                        <li><i className="fas fa-thermometer-full"></i> Max: {weather.daily[0].temp.max} °C</li>
+                        <li><i className="fas fa-thermometer-quarter"></i> Min: {weather.daily[0].temp.min} °C</li>
                     </ul>
                 </div>
             )
@@ -121,12 +121,9 @@ class forecastWeather extends Component {
         const dayLabels = [];
         this.state.weathers.map(weather => {
             weather.daily.map((day, i) =>{
-                console.log(i)
                 dayLabels.push(this.getDay(day.dt))
-                console.log(dayLabels[i])
             })
         })
-        console.log(dayLabels)
         return dayLabels
 
     }
@@ -142,25 +139,27 @@ class forecastWeather extends Component {
                 }
             })
         })
-        console.log(temperature)
         return temperature
     }
+
 
     setSnowOrRain(value){
         const precipitation = [];
         this.state.weathers.map(weather => {
             weather.daily.map((day, i) =>{
                 if(value === 'rain'){
-                    if(!(day.rain)) {
+                    if(day.hasOwnProperty('rain')) {
                         precipitation.push(day.rain)
                     }
                 }else{
-                    if(!(day.snow)) {
+                    if(day.hasOwnProperty('snow')) {
                         precipitation.push(day.snow)
                     }
                 }
             })
         })
+
+        return precipitation
     }
 
     generateLineTempChart(){
@@ -187,7 +186,6 @@ class forecastWeather extends Component {
                 }
             ]
         }
-
         const barRain = {
             labels: this.setLabels(),
             datasets: [{
@@ -210,7 +208,7 @@ class forecastWeather extends Component {
                 backgroundColor: 'rgb(201,201,201)',
                 borderColor: 'rgb(201,201,201)',
                 borderWidth: 2,
-                data: this.setSnowOrRain('rain')
+                data: this.setSnowOrRain('snow')
             }]
         }
 
@@ -243,7 +241,12 @@ class forecastWeather extends Component {
                                 fontColor: 'rgb(255,255,255)',
                             }
                         }]
-                      }
+                    },
+                      tooltips: {
+                          callbacks: {
+                              label: (item) => `${item.yLabel} °C`,
+                          },
+                      },
                 }}>
                 </Line>
                 </div>
@@ -274,7 +277,12 @@ class forecastWeather extends Component {
                                  fontColor: 'rgb(255,255,255)',
                              }
                          }]
-                     }
+                     },
+                     tooltips: {
+                         callbacks: {
+                             label: (item) => `${item.yLabel} mm`,
+                         },
+                     },
                  }}
                 >
                 </Bar>
@@ -306,7 +314,12 @@ class forecastWeather extends Component {
                                      fontColor: 'rgb(255,255,255)',
                                  }
                              }]
-                         }
+                         },
+                         tooltips: {
+                             callbacks: {
+                                 label: (item) => `${item.yLabel} mm`,
+                             },
+                         },
                      }}>
 
                 </Bar>

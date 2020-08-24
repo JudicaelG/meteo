@@ -158,7 +158,7 @@ class Weather extends Component{
                                     <ul className="pl-2">
                                         <li>{this.state.weathers.map(weather => weather.weather[0].description)}</li>
                                         <li>Nébulosité : {this.state.weathers.map(weather => weather.clouds.all)} %</li>
-                                        <li>Température : {this.state.weathers.map(weather => weather.main.temp)} C°</li>
+                                        <li>Température : {this.state.weathers.map(weather => weather.main.temp)} °C</li>
                                     </ul>
                                 </div>
                                 <div className="col-sm d-flex align-items-center">
